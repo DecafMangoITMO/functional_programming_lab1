@@ -16,9 +16,9 @@
 * Название: `Lattice Paths`
 * Описание: `Starting in the top left corner of a  grid, and only being able to move to the right and down, 
 there are exactly  routes to the bottom right corner.`
+* Задание: `How many such routes are there through a 20x20 grid?`
 
 ![task15!](img/task15.png)
-* Задание: `How many such routes are there through a 20x20 grid?`
 
 --- 
 
