@@ -18,6 +18,9 @@ jobs:
         with:
           go-version: 1.21
 
+      - name: Show files
+        run: ls -l 
+
       - name: Install golangci-lint
         run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
