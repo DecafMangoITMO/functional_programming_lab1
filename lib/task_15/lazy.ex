@@ -1,4 +1,6 @@
 defmodule Task15.Lazy do
+  @moduledoc "Realization by using lasy components"
+
   @spec factorial(integer()) :: integer()
   defp factorial(n),
     do:

@@ -1,4 +1,6 @@
 defmodule Task15.Recursion do
+  @moduledoc "Realization by using recursion"
+
   defp factorial(1), do: 1
 
   defp factorial(n), do: n * factorial(n - 1)

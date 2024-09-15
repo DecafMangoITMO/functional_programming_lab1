@@ -1,4 +1,6 @@
 defmodule Task15.TailRecursion do
+  @moduledoc "Realization by using tail recursion"
+
   defp factorial(n), do: factorial(n, 1)
 
   defp factorial(1, acc), do: acc

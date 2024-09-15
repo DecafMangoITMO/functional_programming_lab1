@@ -1,4 +1,6 @@
 defmodule Task16.Lazy do
+  @moduledoc "Realization by using lasy components"
+
   def solution(pow) do
     Stream.iterate(trunc(:math.pow(2, pow)), &div(&1, 10))
     |> Stream.take(pow)

@@ -1,7 +1,9 @@
 defmodule Task16.Modular do
-  alias Task15.Modular.SequenceGenerator
+  @moduledoc "Realization by using modules (generate, filter, reduce + map)"
 
   defmodule SequenceGenerator do
+    @moduledoc "Module-generator"
+
     @spec generate_sequence(integer()) :: list()
     def generate_sequence(num), do: generate_sequence(num, [])
 
@@ -11,18 +13,27 @@ defmodule Task16.Modular do
   end
 
   defmodule SequenceFilter do
+    @moduledoc "Module-filter"
+
     @spec filter_sequence(list()) :: list()
     def filter_sequence(sequence), do: Enum.filter(sequence, &is_integer/1)
   end
 
   defmodule SequenceMapper do
+    @moduledoc "Module-mapper"
+
+    @spec map_sequence(list()) :: list()
     def map_sequence(sequence), do: Enum.map(sequence, & &1)
   end
 
   defmodule SequenceReducer do
+    @moduledoc "Module-reducer"
+
+    @spec reduce_sequence(list()) :: integer()
     def reduce_sequence(integer_sequence), do: Enum.reduce(integer_sequence, 0, &(&1 + &2))
   end
 
+  @spec solution(integer()) :: integer()
   def solution(pow) do
     SequenceGenerator.generate_sequence(trunc(:math.pow(2, pow)))
     |> SequenceFilter.filter_sequence()

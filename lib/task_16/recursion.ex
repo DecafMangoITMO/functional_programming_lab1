@@ -1,4 +1,6 @@
 defmodule Task16.Recursion do
+  @moduledoc "Realization by using recursion"
+
   defp calculate(0), do: 0
 
   defp calculate(num), do: rem(num, 10) + calculate(div(num, 10))
