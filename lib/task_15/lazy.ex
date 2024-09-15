@@ -10,6 +10,7 @@ defmodule Task15.Lazy do
 
   @spec solution(integer()) :: integer()
   def solution(grid_size) do
+    IO.puts factorial(2 * grid_size)
     trunc(factorial(2 * grid_size) / (factorial(grid_size) * factorial(grid_size)))
   end
 end
