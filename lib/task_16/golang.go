@@ -21,7 +21,12 @@ func solution(number *big.Int) *big.Int {
 
 func main() {
 	var pow int64
-	fmt.Scan(&pow)
+	_, err := fmt.Scan(&pow)
+
+	if err != nil {
+		fmt.Println("Error")
+		return
+	}
 
 	number := big.NewInt(2)
 	number.Exp(number, big.NewInt(pow), nil)

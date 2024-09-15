@@ -19,7 +19,12 @@ func factorial(n int64) *big.Int {
 
 func main() {
 	var gridSize int64
-	fmt.Scan(&gridSize)
+	_, err := fmt.Scan(&gridSize)
+
+	if err != nil {
+		fmt.Println("Error")
+		return
+	}
 
 	result := big.NewInt(0);
 	result.Add(result, factorial(2 * gridSize))
