@@ -21,7 +21,7 @@ func main() {
 	var gridSize int64
 	_, err := fmt.Scan(&gridSize)
 
-	if err != nil {
+	if err != nil || gridSize <= 0 {
 		fmt.Println("Error")
 		return
 	}

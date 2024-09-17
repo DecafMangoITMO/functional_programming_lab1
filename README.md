@@ -42,10 +42,10 @@ defmodule Task15.Recursion do
 
   defp factorial(1), do: 1
 
-  defp factorial(n), do: n * factorial(n - 1)
+  defp factorial(n) when is_integer(n) and n > 1, do: n * factorial(n - 1)
 
   @spec solution(pos_integer()) :: integer()
-  def solution(grid_size) do
+  def solution(grid_size) when is_integer(grid_size) and grid_size > 0 do
     trunc(factorial(2 * grid_size) / (factorial(grid_size) * factorial(grid_size)))
   end
 end
@@ -59,14 +59,14 @@ end
 defmodule Task15.TailRecursion do
   @moduledoc "Realization by using tail recursion"
 
-  defp factorial(n), do: factorial(n, 1)
+  defp factorial(n) when is_integer(n) and n > 1, do: factorial(n, 1)
 
   defp factorial(1, acc), do: acc
 
-  defp factorial(n, acc), do: factorial(n - 1, n * acc)
+  defp factorial(n, acc) when is_integer(n) and n > 1, do: factorial(n - 1, n * acc)
 
   @spec solution(pos_integer()) :: integer()
-  def solution(grid_size),
+  def solution(grid_size) when is_integer(grid_size) and grid_size > 0,
     do: trunc(factorial(2 * grid_size) / (factorial(grid_size) * factorial(grid_size)))
 end
 ```
@@ -83,7 +83,7 @@ defmodule Task15.Modular do
     @moduledoc "Module-generator"
 
     @spec generate_sequence(pos_integer()) :: Range.t()
-    def generate_sequence(n) when n > 1, do: 1..n
+    def generate_sequence(n) when is_integer(n) and n > 1, do: 1..n
   end
 
   defmodule SequenceFilter do
@@ -108,7 +108,7 @@ defmodule Task15.Modular do
   end
 
   @spec solution(pos_integer()) :: integer()
-  def solution(grid_size) do
+  def solution(grid_size) when is_integer(grid_size) and grid_size > 0 do
     factorial =
       &(SequenceGenerator.generate_sequence(&1)
         |> SequenceMapper.map_sequence()
@@ -129,14 +129,14 @@ defmodule Task15.Lazy do
   @moduledoc "Realization by using lasy components"
 
   @spec factorial(integer()) :: integer()
-  defp factorial(n),
+  defp factorial(n) when is_integer(n) and n > 0,
     do:
       Stream.iterate(1, &(&1 + 1))
       |> Stream.take(n)
       |> Enum.reduce(1, &(&1 * &2))
 
   @spec solution(integer()) :: integer()
-  def solution(grid_size) do
+  def solution(grid_size) when is_integer(grid_size) and grid_size > 0 do
     trunc(factorial(2 * grid_size) / (factorial(grid_size) * factorial(grid_size)))
   end
 end
@@ -170,7 +170,7 @@ func main() {
 	var gridSize int64
 	_, err := fmt.Scan(&gridSize)
 
-	if err != nil {
+	if err != nil || gridSize <= 0 {
 		fmt.Println("Error")
 		return
 	}
@@ -216,10 +216,10 @@ defmodule Task16.Recursion do
 
   defp calculate(0), do: 0
 
-  defp calculate(num), do: rem(num, 10) + calculate(div(num, 10))
+  defp calculate(num) when is_integer(num) and num > 0, do: rem(num, 10) + calculate(div(num, 10))
 
   @spec solution(non_neg_integer()) :: non_neg_integer()
-  def solution(pow) when pow > 0, do: calculate(trunc(:math.pow(2, pow)))
+  def solution(pow) when is_integer(pow) and pow > 0, do: calculate(trunc(:math.pow(2, pow)))
 end
 ```
 
@@ -233,10 +233,10 @@ defmodule Task16.TailRecursion do
 
   defp calculate(0, acc), do: acc
 
-  defp calculate(num, acc), do: calculate(div(num, 10), acc + rem(num, 10))
+  defp calculate(num, acc) when is_integer(num) and num > 0, do: calculate(div(num, 10), acc + rem(num, 10))
 
   @spec solution(integer()) :: integer()
-  def solution(pow), do: calculate(trunc(:math.pow(2, pow)), 0)
+  def solution(pow) when is_integer(pow) and pow > 0, do: calculate(trunc(:math.pow(2, pow)), 0)
 end
 ```
 
@@ -252,11 +252,11 @@ defmodule Task16.Modular do
     @moduledoc "Module-generator"
 
     @spec generate_sequence(integer()) :: list()
-    def generate_sequence(num), do: generate_sequence(num, [])
+    def generate_sequence(num) when is_integer(num) and num > 0, do: generate_sequence(num, [])
 
     defp generate_sequence(0, acc), do: acc
 
-    defp generate_sequence(num, acc), do: generate_sequence(div(num, 10), [rem(num, 10) | acc])
+    defp generate_sequence(num, acc) when is_integer(num) and num > 0, do: generate_sequence(div(num, 10), [rem(num, 10) | acc])
   end
 
   defmodule SequenceFilter do
@@ -281,7 +281,7 @@ defmodule Task16.Modular do
   end
 
   @spec solution(integer()) :: integer()
-  def solution(pow) do
+  def solution(pow) when is_integer(pow) and pow > 0 do
     SequenceGenerator.generate_sequence(trunc(:math.pow(2, pow)))
     |> SequenceFilter.filter_sequence()
     |> SequenceMapper.map_sequence()
@@ -298,7 +298,7 @@ end
 defmodule Task16.Lazy do
   @moduledoc "Realization by using lasy components"
 
-  def solution(pow) do
+  def solution(pow) when is_integer(pow) and pow > 0 do
     Stream.iterate(trunc(:math.pow(2, pow)), &div(&1, 10))
     |> Stream.take(pow)
     |> Stream.map(&rem(&1, 10))
@@ -337,7 +337,7 @@ func main() {
 	var pow int64
 	_, err := fmt.Scan(&pow)
 
-	if err != nil {
+	if err != nil || pow <= 0 {
 		fmt.Println("Error")
 		return
 	}

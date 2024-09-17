@@ -5,11 +5,12 @@ defmodule Task16.Modular do
     @moduledoc "Module-generator"
 
     @spec generate_sequence(integer()) :: list()
-    def generate_sequence(num), do: generate_sequence(num, [])
+    def generate_sequence(num) when is_integer(num) and num > 0, do: generate_sequence(num, [])
 
     defp generate_sequence(0, acc), do: acc
 
-    defp generate_sequence(num, acc), do: generate_sequence(div(num, 10), [rem(num, 10) | acc])
+    defp generate_sequence(num, acc) when is_integer(num) and num > 0,
+      do: generate_sequence(div(num, 10), [rem(num, 10) | acc])
   end
 
   defmodule SequenceFilter do
@@ -34,7 +35,7 @@ defmodule Task16.Modular do
   end
 
   @spec solution(integer()) :: integer()
-  def solution(pow) do
+  def solution(pow) when is_integer(pow) and pow > 0 do
     SequenceGenerator.generate_sequence(trunc(:math.pow(2, pow)))
     |> SequenceFilter.filter_sequence()
     |> SequenceMapper.map_sequence()

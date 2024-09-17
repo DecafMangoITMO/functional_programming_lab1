@@ -5,7 +5,7 @@ defmodule Task15.Modular do
     @moduledoc "Module-generator"
 
     @spec generate_sequence(pos_integer()) :: Range.t()
-    def generate_sequence(n) when n > 1, do: 1..n
+    def generate_sequence(n) when is_integer(n) and n > 1, do: 1..n
   end
 
   defmodule SequenceFilter do
@@ -30,7 +30,7 @@ defmodule Task15.Modular do
   end
 
   @spec solution(pos_integer()) :: integer()
-  def solution(grid_size) do
+  def solution(grid_size) when is_integer(grid_size) and grid_size > 0 do
     factorial =
       &(SequenceGenerator.generate_sequence(&1)
         |> SequenceMapper.map_sequence()

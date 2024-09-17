@@ -23,7 +23,7 @@ func main() {
 	var pow int64
 	_, err := fmt.Scan(&pow)
 
-	if err != nil {
+	if err != nil || pow <= 0 {
 		fmt.Println("Error")
 		return
 	}
